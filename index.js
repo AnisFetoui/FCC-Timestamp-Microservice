@@ -23,11 +23,14 @@ app.get("/api/hello", function (req, res) {
   res.json({ greeting: "hello API" });
 });
 
-app.get("/api", function (req, res) {
-  let currentUnix = new Date().getTime();
-  let currentUtc = new Date().toUTCString();
-  res.json({ unix: currentUnix, utc: currentUtc });
-});
+app.get("/api", (req, res)=>{
+  let date = new Date();
+  let UTC = date.getTime()+20000;
+  UTC = new Date(UTC);
+  UTS = UTC.toUTCString();
+  let UNIX = date.getTime()+20000;
+  res.json({ unix: UNIX, utc: UTS });
+})
 
 app.get("/api/:date_string", (req, res) => {
   let dateString = req.params.date_string;
