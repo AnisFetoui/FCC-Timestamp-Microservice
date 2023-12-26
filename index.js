@@ -26,22 +26,35 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/",(req,res)=>{
   let now= new Date();  
     res.json({
-      unix: now.getTime(), utc: now.toUTCString()
+      "unix": now.getTime(),
+      "utc": now.toUTCString()
     })
   
-  // console.log(dateString);
 });
+
 app.get("/api/:date_string",(req,res)=>{
   let dateString= req.params.date_string;
+
+  if(!isNaN(dateString)){
+    let result = new Date(parseInt(dateString))
+    res.json({
+      "unix": result.getTime(),
+      "utc": result.toUTCString()
+    });
+
+  }
+
+
   let passedValue = new Date(dateString);
   if(passedValue == "Invalid Date"){
   res.json({"error": "Invalid date"});
   }else{
     res.json({
-      unix: passedValue.getTime(), utc: passedValue.toUTCString()
+      "unix": passedValue.getTime(),
+      "utc": passedValue.toUTCString()
     })
   }
-  // console.log(dateString);
+
 });
 
 
