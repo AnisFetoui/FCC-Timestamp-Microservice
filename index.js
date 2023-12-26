@@ -23,10 +23,15 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
+app.get("/api/:date_string",(req,res)=>{
+  let dateString= req.params.date_string;
+  console.log(dateString);
+  res.json({"error": "Invalid date"});
+});
 
 
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
+var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
