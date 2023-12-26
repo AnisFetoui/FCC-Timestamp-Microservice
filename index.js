@@ -23,10 +23,25 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
+app.get("/api/",(req,res)=>{
+  let now= new Date();  
+    res.json({
+      unix: now.getTime(), utc: now.toUTCString()
+    })
+  
+  // console.log(dateString);
+});
 app.get("/api/:date_string",(req,res)=>{
   let dateString= req.params.date_string;
-  console.log(dateString);
+  let passedValue = new Date(dateString);
+  if(passedValue == "Invalid Date"){
   res.json({"error": "Invalid date"});
+  }else{
+    res.json({
+      unix: passedValue.getTime(), utc: passedValue.toUTCString()
+    })
+  }
+  // console.log(dateString);
 });
 
 
